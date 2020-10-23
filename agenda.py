@@ -10,11 +10,15 @@ from copy import deepcopy
 from goal_generator import GoalGenerator
 from utils import init_session, init_goal
 from tracker import StateTracker
-"""
-aaa
-"""
 
+"""
+action = [domain-intent-slot]
 
+REF_USR_DA, REF_SYS_DA -->
+{
+domain :{slot_full_name: slot_abbreviation}, 
+...}
+"""
 
 REF_USR_DA = {
     'Attraction': {
@@ -96,6 +100,8 @@ REF_SYS_DA = {
     },
 }
 
+# def book slot
+BOOK_SLOT = ['people', 'day', 'stay', 'time']
 
 DEF_VAL_UNK = '?'  # Unknown
 DEF_VAL_DNC = 'don\'t care'  # Do not care
@@ -105,6 +111,11 @@ DEF_VAL_NOBOOK = 'no'  # for booked
 NOT_SURE_VALS = [DEF_VAL_UNK, DEF_VAL_DNC, DEF_VAL_NUL, DEF_VAL_NOBOOK]
 
 # import reflect table
+"""
+python deepcopy():copy objects and their children objects
+
+python lower():convert uppercase to lowercase
+"""
 REF_USR_DA_M = deepcopy(REF_USR_DA)
 REF_SYS_DA_M = {}
 for dom, ref_slots in REF_SYS_DA.items():
@@ -113,9 +124,6 @@ for dom, ref_slots in REF_SYS_DA.items():
     for slot_a, slot_b in ref_slots.items():
         REF_SYS_DA_M[dom][slot_a.lower()] = slot_b
     REF_SYS_DA_M[dom]['none'] = None
-
-# def book slot
-BOOK_SLOT = ['people', 'day', 'stay', 'time']
 
 class UserAgenda(StateTracker):
     """ The rule-based user policy model by agenda"""
