@@ -12,6 +12,7 @@ from utils import init_session, init_goal
 from tracker import StateTracker
 
 """
+DA:dialog action
 action = [domain-intent-slot]
 
 REF_USR_DA, REF_SYS_DA -->
